@@ -1,0 +1,127 @@
+.o-sched {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  &.js-collapsed {
+    width: 50px;
+    
+    .o-sched {
+      &__thin {
+        display: block;
+      }
+    }
+  }
+  
+  &__background {
+    background-color: #000;
+    display: none;
+    height: 100%;
+    opacity: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 80;
+  }
+  
+  &__loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    >img {
+      @include vert-centerer;
+      top: 45%;
+    }
+  }
+  
+  &__thin {
+    position: fixed;
+    z-index: 90;
+    left: 0;
+    width: 50px;
+    height: 120px;
+  }
+  
+  &__wide {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: -80%;
+    overflow: hidden;
+    width: 80%;
+    height: 100%;
+    padding: 1em;
+    background-color: $c-black-base;
+    
+    &__inner {
+      position: relative;
+      padding: 1em;
+      border: 2px solid $c-yellow-base;
+      overflow: hidden;
+    }
+    
+    
+   /* &:after {
+      display: block;
+      position: absolute;
+      top: 1em;
+      left: 1em;
+      pointer-events: none;
+      background-color: transparent;
+      padding: 1em;
+      border: 1px solid $c-yellow-base;
+      content: '';
+      width: calc(100% - 32px);
+      height: calc(100% - 32px);
+    }*/
+  }
+  
+  &__close-wrapper {
+    position: relative;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    perspective: 400;
+    perspective-origin: 80% 50px;
+  }
+  
+  &__close-button {
+    position: absolute;
+    top: 0;
+    left: 80%;
+    width: 50px;
+    display: none;
+    transition: background-color 250ms ease-in-out;
+    transform: rotateY(90deg);
+    transform-origin: 0 0 0;
+  }
+  
+  &__trigger {
+    display: block;
+    width: 50px;
+    height: 120px;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    text-indent: -9999px;
+    background: transparent url('../images/icon-trigger.svg') no-repeat;
+    &:hover,
+    &:active,
+    &:visited {
+      color: black;
+      text-decoration: none;
+    }
+
+  }  
+  
+}
+
+.js-scroll {
+  position: relative;
+  width: 100%;
+  padding-right: -8px;
+  height: calc(100vh - 112px);
+}

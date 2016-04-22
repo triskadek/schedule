@@ -1,0 +1,26 @@
+{
+  "name": "schedule-referee",
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass": "~3.3.5",
+    "modernizr": "~2.8.1",
+    "handlebars": "^4.0.5",
+    "gsap": "^1.18.2",
+    "juice": "^1.0.1",
+    "underscore": "^1.8.3",
+    "perfect-scrollbar": "^0.6.10"
+  },
+  "overrides": {
+    "bootstrap-sass": {
+      "main": [
+        "assets/stylesheets/_bootstrap.scss",
+        "assets/fonts/bootstrap/*",
+        "assets/javascripts/bootstrap.js"
+      ]
+    }
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}

@@ -1,0 +1,189 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+  <title>schedule referee</title>
+
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="/bower_components/fontawesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="/bower_components/perfect-scrollbar/css/perfect-scrollbar.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+
+  <!-- build:js scripts/vendor/modernizr.js -->
+  <script src="/bower_components/modernizr/modernizr.js"></script>
+  <!-- endbuild -->
+</head>
+
+<body>
+  <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <div class="wrapper">
+
+    <!-- object schedule aka. sched -->
+    <div class="o-sched js-collapsed">
+      <div class="o-sched__background"></div>
+      <div class="o-sched__thin">
+        <a href="#" class="o-sched__trigger">
+            Pizarra 
+          </a>
+      </div>
+      <div class="o-sched__wide">
+        <div class="o-sched__wide__inner">
+          <!--the shcedule goes here-->
+          <div class="o-sched__header">
+            <h1 class="sr-only">Schedule</h1>
+            <div class="o-sched__filters">
+              <div class="form-group">
+                <select name="s-league" id="s-league" class="form-control">
+                <option value="0">Todas</option>
+              </select>
+              </div>
+            </div>
+          </div>
+          <div class="o-sched__loader">
+            <img src="images/loader.gif" alt="">
+          </div>
+          <!-- base element for mounting -->
+          <div class="js-scroll"></div>
+        </div>
+
+      </div>
+      <div class="o-sched__close-wrapper">
+        <div class="o-sched__close-button">
+          <a href="#" class="o-sched__trigger">
+              Pizarra                          
+            </a>
+        </div>
+      </div>
+    </div>
+    <!-- end object schedule -->
+
+    <div class="container">
+      <button id="another-trigger">pizarra</button>
+    </div>
+
+  </div>
+  
+  <script type="text/x-handlebars-template" id="leagues-tpl">
+    <ul class="c-leagues u-list-nostyle">
+    {{#each this}}
+      <li class="o-league">
+        <div class="o-league__score-board">
+          <h3 class="o-league__name"><span>{{competition}}</span></h3> 
+         {{#each matches}}
+          <div class="o-league__match">
+            <div class="o-match">
+              <div class="o-match__game-details">
+                <ul class="o-team u-list-nostyle">
+                  <li class="o-team__home">
+                    <div class="o-team__logo">
+                      <img src="images/logos/{{equipos.local.uID}}.svg" alt="{{equipos.local.nombre}}" height="30">
+                    </div>
+                    <div class="o-team__names">
+                      <span class="o-team__name o-team__name--long">{{equipos.local.nombre}}</span>
+                      <span class="o-team__name o-team__name--short">{{equipos.local.shortname}}</span>
+                      <span class="o-team__name o-team__name--abbrev">{{equipos.local.siglas}}</span>
+                    </div>
+                  </li>
+                  <li class="o-match__overview o-match__overview--{{lowercase periodo}}">
+                    <span class="o-match__score">{{equipos.local.goles}}</span>
+                    {{#is periodo '===' "Final"}} 
+                      <span class="o-match__period">F</span>
+                      {{else}} 
+                      <span class="o-match__date">
+                          <span class="o-match__date__day">{{#date fecha}}{{/date}}</span>
+                          <span class="o-match__date__hour">{{#hour hora}}{{/hour}} ct</span>
+                      </span>  
+                    {{/is}}
+                    <span class="o-match__score">{{equipos.visitante.goles}}</span>
+                  </li>
+                  <li class="o-team__away">
+                    <div class="o-team__logo">
+                      <img src="images/logos/{{equipos.visitante.uID}}.svg" alt="{{equipos.visitante.nombre}}" height="30">
+                    </div>
+                    <div class="o-team__names">
+                      <span class="o-team__name o-team__name--long">{{equipos.visitante.nombre}}</span>
+                      <span class="o-team__name o-team__name--short">{{equipos.visitante.shortname}}</span>
+                      <span class="o-team__name o-team__name--abbrev">{{equipos.visitante.siglas}}</span>
+                    </div>
+
+                  </li>
+                </ul>
+                <div class="o-match__where">
+                  <span class="o-match__where__city">{{ciudad}}</span>
+                  <span class="o-match__where__stadium">{{estadio}}</span>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </li>
+    {{/each}}
+    </ul>
+  </script>
+  
+  <script type="text/x-handlebars-template" id="opt-league-tpl">
+    {{#each this}}
+      <option value="{{id}}">{{competition}}</option>  
+    {{/each}}
+  </script>
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+  <script>
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+  </script>
+
+  <!-- build:js scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/bower_components/handlebars/handlebars.js"></script>
+  <script src="/bower_components/gsap/src/uncompressed/TweenMax.js"></script>
+  <script src="/bower_components/underscore/underscore.js"></script>
+  <script src="/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+  <script src="/bower_components/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js scripts/plugins.js -->
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js scripts/main.js -->
+  <script src="scripts/helpers.js"></script>
+  <script src="scripts/main.js"></script>
+  <!-- endbuild -->
+</body>
+
+</html>

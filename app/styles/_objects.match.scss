@@ -1,0 +1,88 @@
+.o-match {
+  display: block;
+  position: relative;
+
+  border-bottom: 1px solid #363636;
+  border-top: 1px solid #363636;
+  
+  
+ 
+ &__where {
+   display: none;
+   padding: 0 1em;
+   @include bp(min,1024px) {
+    display: inline-block;
+    vertical-align: middle;
+    width: 39%;
+    font-size: 12px;
+    text-align: center;
+    word-wrap: break-word;
+    color: rgba(white, 0.75);
+  }
+ }
+  &__overview {
+    width: calc(100% - 110px);
+    text-align: center;
+    color: white;
+    
+    @include bp(small-up) {
+      width: 28%;
+    }
+    
+    > span {
+      display: inline-block;
+      vertical-align: middle;
+      width: 18%;
+      box-sizing: border-box;
+      font-size: 22px;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: TradeGothicLTStd;
+      &.o-match__period {
+        width: 60px;
+      }
+    }
+    &--previo {
+      > span.o-match__date {
+        width: 60px;
+      }
+      > span.o-match__score {
+        display: none !important;
+      }
+    }
+  }
+  &__game-details {
+    display: block;
+    width: 100%;
+    position: relative;
+    clear: both;
+  }
+  
+  &__date {
+    text-align: center;
+    &__day,
+    &__hour {
+      display: block;
+      line-height: 1;
+      width: 100%;
+    }
+    
+    &__day {
+      font-size: 18px;
+      line-height: 22px;
+      letter-spacing: 0.1em;
+    }
+    &__hour {
+      font-family: 'Acronym-Light';
+      font-size: 12px;
+      color: rgba(white, 0.75);
+      line-height: 18px;
+    }
+  }
+  
+  &__date,
+  &__period {
+    padding: 1em 0;
+    background-color: darken($c-black-base, 2%);
+  }
+}

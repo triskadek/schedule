@@ -1,0 +1,36 @@
+$icon-font-path: '../fonts/';
+
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/juice/dist/_juice.scss";
+// endbower
+
+@import "settings.config";
+@import "tools.mixins";
+
+@include font-face(TradeGothicLTStd-BdCn20Obl, "../fonts/TradeGothicLTStd-BdCn20Obl");
+@include font-face(TradeGothicLTStd, "../fonts/TradeGothicLTStd-BdCn20");
+
+@include font-face(Acronym-Bold, "../fonts/Acronym-Bold");
+@include font-face(Acronym-Light, "../fonts/Acronym-Light");
+
+
+@import "components.leagues";
+
+@import "objects.layout";
+
+@import "objects.schedule";
+@import "objects.match";
+@import "objects.league";
+@import "objects.team";
+
+.u-list-nostyle {
+  @include clean;
+  list-style: none;
+}
+
+
+
+
+

@@ -1,0 +1,49 @@
+.o-league {
+  margin-bottom: 1.5em;
+  
+  &__name {
+    margin-top: 0;
+    margin-bottom: .5em;
+    font-family: "TradeGothicLTStd-BdCn20Obl";
+    position: relative;
+    background-color: $c-yellow-base;
+    padding: 4px 4px 4px 2px;
+    width: auto;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: $c-black-base;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    margin-left: 18px;
+    &:after,
+    &:before {
+      position: absolute;
+      content: '';
+      display: block;
+      top: 0;
+    }
+    
+    &:before {
+      left: -18px;
+      border-left: 18px solid transparent;
+      border-right: 0 solid transparent;
+      border-top: 0 solid $c-yellow-base;
+      border-bottom: 25px solid $c-yellow-base;
+    }
+    
+    &:after {
+      right: -18px;
+      border-left: 0 solid transparent;
+      border-right: 18px solid transparent;
+      border-top: 25px solid $c-yellow-base;
+      border-bottom: 0 solid transparent;
+    }
+  }
+  
+  &__match {
+    border-bottom: 1px solid #1b1b1b;
+    border-top: 1px solid #1b1b1b;
+    -webkit-font-smoothing: antialiased;
+  }
+}
