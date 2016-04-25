@@ -28,8 +28,10 @@ var Schedule = (function ($) {
     ui = {},
     leagues = [],
     baseUrl = 'http://pizarra.debbie.com.mx/widget/',
+    calendarUrl = ' http://pizarra.debbie.com.mx/calendar/leagues/{0}',
     elem,
     path = 'partidos',
+    calendar = [],
 
     create = function (el) {
 
@@ -57,7 +59,8 @@ var Schedule = (function ($) {
         close: elem.find('.o-sched__close-button'),
         scroller: elem.find('.js-scroll'),
         selectLeague: elem.find('#s-league'),
-        loader: elem.find('.o-sched__loader')
+        loader: elem.find('.o-sched__loader'),
+        calendar : elem.find('.o-sched__calendar')
       };
 
       // preparing the interaction 
@@ -90,12 +93,33 @@ var Schedule = (function ($) {
         $.publish('schedule/query:league', [this.value]);
       });
       
+      
+      ui.calendar.on('click', 'a' , _.debounce(onClickDate, 1000, true));
+      
+    },
+
+    onClickDate = function () {
+      
+      var date = $(this).data('date'),
+          url = '';
+          
+        if(typeof date === undefined) {return false};
+        
+        // /widget/leages/{id}/date/{date}​
+        url = baseUrl+ path + '/date/' + date;
+       
+       $.publish('schedule/query:calendar:date', [url]);
+      
+      return false;
     },
 
     subscriptions = function () {
       $.subscribe('schedule/query', fetchJSON);
       $.subscribe('schedule/render', renderResults);
+      $.subscribe('schedule/render:calendar', renderCalendar);
       $.subscribe('schedule/query:league', fetchByLeague);
+      $.subscribe('schedule/query:calendar', fetchCalendar);
+      $.subscribe('schedule/query:calendar:date', fetchByDate);
     },
 
     fetchJSON = function (e, action) {
@@ -111,8 +135,6 @@ var Schedule = (function ($) {
           setTimeout(function () {
             $.publish('schedule/render', [action]);
           }, 1500)
-
-          console.log(leagues);
         }
       });
     },
@@ -131,8 +153,36 @@ var Schedule = (function ($) {
           path = 'leagues/' + league;
         }
       }
-
+      
+      $.publish('schedule/query:calendar', [league ]);
       $.publish('schedule/query', ['LEAGUE_CHANGE']);
+      
+    },
+    
+    fetchCalendar = function (e, league) {
+      var verb = format(calendarUrl, league);
+      
+      $.post(verb, function (res) {
+        if('status' in res && res.status === "ok") {
+          calendar = res.gameDates;
+          $.publish('schedule/render:calendar');
+        }
+         
+      });
+    },
+    
+    fetchByDate = function (e, url) {
+      console.log(url);
+      
+      $.post(url, function (res) {
+        if('status' in res && res.status === "ok") {
+          leagues = [];
+          leagues = res.leagues;
+          
+          $.publish('schedule/render', ['LEAGUE_CHANGE']);
+        }
+        
+      });
     },
 
     renderResults = function (e, action) {
@@ -145,6 +195,7 @@ var Schedule = (function ($) {
       
       if (action !== undefined && action === 'LEAGUE_CHANGE') {
         ui.scroller
+          .empty()
           .append(dom);
       } else {
         ui.scroller
@@ -160,6 +211,12 @@ var Schedule = (function ($) {
       });
 
       TweenMax.staggerFrom(matches, .5, { rotationX: '90deg', delay: 0.5, force3D: true }, 0.2);
+    },
+    
+    renderCalendar = function (){
+      var dom = template('calendar-tpl')(calendar);
+      
+      ui.calendar.empty().append(dom);
     },
 
     toggle = function () {
@@ -181,10 +238,15 @@ var Schedule = (function ($) {
       return isOpen = !isOpen;
     },
 
+    // utils
     template = function (idTemplate) {
       var source = $('#' + idTemplate).html();
       return Handlebars.compile(source);
-    }
+    },
+    
+    format = function(url, fragment) {
+      return url.replace(/{(\d+)}/g, fragment);
+    };
 
   // public API
   return {
@@ -196,9 +258,13 @@ var Schedule = (function ($) {
 
 (function (global) {
 
-  var element = document.querySelector('.o-sched'),
-    pizarra = Schedule.create(element);
+  var element = document.querySelector('.o-sched');
+  
+  Schedule.create(element);
    
-   global.pizarra = pizarra;
+   $('#another-trigger').click(function (evt) {
+     evt.preventDefault();
+     Schedule.toggle();
+   });
    
 })(window);

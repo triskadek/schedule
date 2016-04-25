@@ -52,6 +52,8 @@
                 <option value="0">Todas</option>
               </select>
               </div>
+              <!-- base element for mount the calendar -->
+              <div class="o-sched__calendar"></div>
             </div>
           </div>
           <div class="o-sched__loader">
@@ -141,6 +143,21 @@
   <script type="text/x-handlebars-template" id="opt-league-tpl">
     {{#each this}}
       <option value="{{id}}">{{competition}}</option>  
+    {{/each}}
+  </script>
+  
+  <script type="text/x-handlebars-template" id="calendar-tpl">
+    {{#each this}}
+    <ul>
+      {{#each dias}}
+      <li>
+        <a href="" data-date="{{../anio}}-{{../mes}}-{{numero}}">
+          <span>{{dia}}</span>
+          <span>{{numero}}</span>
+        </a>
+      </li>
+      {{/each}}
+    </ul>
     {{/each}}
   </script>
 

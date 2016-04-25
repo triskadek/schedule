@@ -12,6 +12,15 @@
     }
   }
   
+  &__calendar {
+    height: 100px;
+    overflow: hidden;
+    > ul, ul > li {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  
   &__background {
     background-color: #000;
     display: none;
@@ -58,21 +67,6 @@
       border: 2px solid $c-yellow-base;
       overflow: hidden;
     }
-    
-    
-   /* &:after {
-      display: block;
-      position: absolute;
-      top: 1em;
-      left: 1em;
-      pointer-events: none;
-      background-color: transparent;
-      padding: 1em;
-      border: 1px solid $c-yellow-base;
-      content: '';
-      width: calc(100% - 32px);
-      height: calc(100% - 32px);
-    }*/
   }
   
   &__close-wrapper {
