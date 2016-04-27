@@ -44,6 +44,7 @@
     @include bp(small-up) {
       text-align: right;
       direction: rtl;
+      padding-right: 1em;
       .o-team {
         &__names{
           margin-right: 0.5em;

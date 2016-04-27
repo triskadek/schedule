@@ -1,0 +1,5 @@
+.ps-container {
+  &.ps-active-x > .ps-scrollbar-x-rail, &.ps-active-y > .ps-scrollbar-y-rail {
+    right: 0 !important;
+  }
+}

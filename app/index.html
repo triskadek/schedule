@@ -150,12 +150,16 @@
   
   <script type="text/x-handlebars-template" id="calendar-tpl">
     {{#each this}}
-    <ul>
+    <ul class="o-calendar">
+      <li class="o-calendar__header">
+        <span class="o-calendar__month">{{mesNombre}}</span>
+        <span class="o-calendar__year">{{anio}}</span>
+      </li>
       {{#each dias}}
-      <li>
-        <a href="" data-date="{{../anio}}-{{../mes}}-{{numero}}">
-          <span>{{dia}}</span>
-          <span>{{numero}}</span>
+      <li class="o-calendar__item">
+        <a href="" data-date="{{../anio}}-{{../mes}}-{{numero}}" class="o-calendar__date">
+          <span class="o-calendar__date__name">{{dia}}</span>
+          <span class="o-calendar__date__day">{{numero}}</span>
         </a>
       </li>
       {{/each}}

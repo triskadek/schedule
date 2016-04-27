@@ -42,9 +42,32 @@ var Schedule = (function ($) {
     calendar = [],
     
     slickSettings = {
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 1
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      adaptiveHeight: true,
+      /*responsive : [
+        {
+          breakpoint : 1140,
+          settings : {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint : 680,
+          settings : {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint : 480,
+          settings : {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]*/
     },
     
     isSlickExists = false,
@@ -90,6 +113,8 @@ var Schedule = (function ($) {
 
       // stop the tween for first time
       timeline.stop();
+      
+      ui.calendar.fadeOut('fast');
 
     },
 
@@ -166,9 +191,11 @@ var Schedule = (function ($) {
           path = 'partidos';
           
           if(isSlickExists) {
-             ui.calendar.slick('unslick');
-             ui.calendar.empty();
-          
+             ui.calendar
+              .fadeOut('fast')
+              .slick('unslick')
+              .empty();
+            
             isSlickExists = false;
           }
          
@@ -245,6 +272,7 @@ var Schedule = (function ($) {
     
     renderCalendar = function (){
       var dom = template('calendar-tpl')(calendar);
+      ui.calendar.fadeIn('fast');
       
       if(!isSlickExists) {
         console.log('no existe el carousel crealo');

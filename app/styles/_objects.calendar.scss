@@ -1,0 +1,69 @@
+.o-calendar {
+  padding: 0;
+  margin: 0;
+  
+  list-style: none;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  
+ 
+ &__header {
+   padding-top: 0.5em;
+   padding-left: 0.5em;
+  
+ } 
+  &__month,
+  &__year {
+    display: inline-block;
+    vertical-align: middle;
+    color: $c-yellow-base;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-family: 'TradeGothicLTStd-BdCn20Obl';
+  }
+  
+  &__item {
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+    margin-bottom: 0.25em;
+  }
+  
+  &__date {
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.25em 0;
+    border-bottom: 2px solid transparent;
+    color: white;
+    &:hover,
+    &:focus,
+    &--active {
+      color: white;
+      text-decoration: none;
+      border-bottom-color: $c-yellow-base;
+      outline: none;
+      background-color: #1f1f1f;
+    }
+    &__day,
+    &__name {
+      text-transform: uppercase;
+      display: block;
+    }
+    
+    &__day {
+      font-family: 'TradeGothicLTStd';
+      font-size: 18px;
+      line-height: 18px;
+    }
+    
+    &__name {
+      font-family: 'Acronym-Light';
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+  }
+}
