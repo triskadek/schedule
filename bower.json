@@ -8,7 +8,8 @@
     "gsap": "^1.18.2",
     "juice": "^1.0.1",
     "underscore": "^1.8.3",
-    "perfect-scrollbar": "^0.6.10"
+    "perfect-scrollbar": "^0.6.10",
+    "slick-carousel": "^1.5.9"
   },
   "overrides": {
     "bootstrap-sass": {

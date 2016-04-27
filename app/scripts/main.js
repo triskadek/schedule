@@ -24,14 +24,30 @@ var Schedule = (function ($) {
   'use strict';
 
   var timeline = new TimelineMax(),
+  
     isOpen = false,
+    
     ui = {},
+    
     leagues = [],
+    
     baseUrl = 'http://pizarra.debbie.com.mx/widget/',
+    
     calendarUrl = ' http://pizarra.debbie.com.mx/calendar/leagues/{0}',
+    
     elem,
+    
     path = 'partidos',
+    
     calendar = [],
+    
+    slickSettings = {
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1
+    },
+    
+    isSlickExists = false,
 
     create = function (el) {
 
@@ -134,7 +150,7 @@ var Schedule = (function ($) {
           
           setTimeout(function () {
             $.publish('schedule/render', [action]);
-          }, 1500)
+          }, 1500);
         }
       });
     },
@@ -148,6 +164,15 @@ var Schedule = (function ($) {
         // get all the leagues
         if (league == "0") {
           path = 'partidos';
+          
+          if(isSlickExists) {
+             ui.calendar.slick('unslick');
+             ui.calendar.empty();
+          
+            isSlickExists = false;
+          }
+         
+          
         } else {
           // get only specific league
           path = 'leagues/' + league;
@@ -197,6 +222,11 @@ var Schedule = (function ($) {
         ui.scroller
           .empty()
           .append(dom);
+          
+          setTimeout(function (){}, function () {
+            
+          })
+        
       } else {
         ui.scroller
           .append(dom);
@@ -210,13 +240,29 @@ var Schedule = (function ($) {
         suppressScrollX: true
       });
 
-      TweenMax.staggerFrom(matches, .5, { rotationX: '90deg', delay: 0.5, force3D: true }, 0.2);
+      TweenMax.staggerFrom(matches, .25, { rotationX: '90deg', delay: 0.5, force3D: true }, 0.25);
     },
     
     renderCalendar = function (){
       var dom = template('calendar-tpl')(calendar);
       
-      ui.calendar.empty().append(dom);
+      if(!isSlickExists) {
+        console.log('no existe el carousel crealo');
+        
+        ui.calendar.append(dom);
+        ui.calendar.slick(slickSettings);
+        
+        isSlickExists = true;
+        
+      }else {
+        console.log('existe el carousel, reconstruyelo');
+        
+        ui.calendar.slick('unslick');
+        
+        ui.calendar.empty().append(dom);
+        ui.calendar.slick(slickSettings);
+      }
+      
     },
 
     toggle = function () {
