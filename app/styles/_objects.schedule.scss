@@ -128,7 +128,10 @@
       color: black;
       text-decoration: none;
     }
-
+    
+    &--close {
+      background-image: url('../images/icon-trigger-close.svg');
+    } 
   }  
   
 }

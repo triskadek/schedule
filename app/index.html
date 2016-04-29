@@ -68,7 +68,7 @@
       </div>
       <div class="o-sched__close-wrapper">
         <div class="o-sched__close-button">
-          <a href="#" class="o-sched__trigger">
+          <a href="#" class="o-sched__trigger o-sched__trigger--close">
               Pizarra                          
             </a>
         </div>
@@ -110,7 +110,7 @@
                       {{else}} 
                       <span class="o-match__date">
                           <span class="o-match__date__day">{{#date fecha}}{{/date}}</span>
-                          <span class="o-match__date__hour">{{#hour hora}}{{/hour}} ct</span>
+                          <span class="o-match__date__hour">{{#hour hora}}{{/hour}}</span>
                       </span>  
                     {{/is}}
                     <span class="o-match__score">{{equipos.visitante.goles}}</span>
@@ -128,8 +128,8 @@
                   </li>
                 </ul>
                 <div class="o-match__where">
-                  <span class="o-match__where__city">{{ciudad}}</span>
                   <span class="o-match__where__stadium">{{estadio}}</span>
+                  <span class="o-match__where__city">{{ciudad}}</span>
                 </div>
               </div>
              

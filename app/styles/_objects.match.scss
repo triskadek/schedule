@@ -10,14 +10,19 @@
  &__where {
    display: none;
    padding: 0 1em;
+   font-family: 'Acronym-Bold';
    @include bp(min,1024px) {
     display: inline-block;
     vertical-align: middle;
     width: 39%;
     font-size: 12px;
-    text-align: center;
+    text-align: left;
     word-wrap: break-word;
-    color: rgba(white, 0.75);
+    color: #fff;
+  }
+  
+  &__city {
+    display: block;
   }
  }
   &__overview {
